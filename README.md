@@ -2,6 +2,7 @@
 LaneGuard: A Spatiotemporal-Aware End-to-End Autonomous Evasive Steering And Emergency Braking Framework
 LaneGuard is a deep reinforcement learning project built on the CARLA simulator, designed to enable autonomous driving in complex environments. The project focuses on end-to-end decision-making by capturing critical temporal dependencies in driving scenarios. It leverages time-series sensor data and ego-vehicle states as the primary observation inputs, and trains an agent using a custom RecurrentPPO implementation based on Stable Baselines3. The core perception and feature extraction module utilizes a unique LSTM-FCN architecture: the Fully Convolutional Network (FCN) branch operates serially, with SENet modules integrated directly inside each convolution layer to dynamically recalibrate channel-wise features. This architecture allows the agent to learn robust, adaptive driving strategies that effectively balance safety and efficiency.
 ![Figure 1: Overview of the LaneGuard framework.](https://raw.githubusercontent.com/lyx3098399213-cloud/LaneGuard/main/framwork.png)
+Figure 1: Overview of the LaneGuard framework.
 # 1. Clone the repository
 git clone https://github.com/yourusername/R-PPO.git
 cd R-PPO
@@ -34,7 +35,6 @@ python eval.py --checkpoint model/r_ppo/final_model.pth --output results/
 
 Repository Structure
 
-Plaintext
 R-PPO/
 ├── README.md
 ├── environment.yml
@@ -46,6 +46,7 @@ R-PPO/
 │   └── lstm_fcn.py
 ├── carla_env.py
 └── traffic_manager.py
+
 The roles of each file are as follows:
 
 train.py: The training entry point, responsible for argument parsing, environment instantiation, the main training loop, periodic evaluation, and model checkpoint saving.
@@ -81,9 +82,9 @@ CARLA: The current configuration uses Town04 as the default scenario.
 2. Create Conda Environment
 The project dependencies are already specified in environment.yml. It is recommended to create an isolated environment directly:
 
-Bash
 conda env create -f environment.yml
 conda activate R-PPO
+
 The core dependencies included in the environment file are:
 
 stable-baselines3[extra]
@@ -108,12 +109,12 @@ conda develop path/to/CARLA/PythonAPI/carla/dist/carla-<your_version>.egg
 
 Example for Windows PowerShell:
 
-PowerShell
 $env:CARLA_ROOT="D:\CARLA_0.9.12"
+
 Example for Linux Bash:
 
-Bash
 export CARLA_ROOT="/path/to/CARLA_0.9.12"
+
 Task Description
 
 This project is specifically designed for autonomous driving navigation using recurrent memory to handle complex, dynamic driving environments.
@@ -163,11 +164,11 @@ Training
 1. Train the Task
 Run the following command in the project root directory:
 
-Bash
 conda activate R-PPO
 
 # Train default task
 python train.py --agent r-ppo
+
 2. Common Arguments
 The training script currently supports many arguments. The most important ones include:
 
@@ -186,7 +187,6 @@ Runtime controls: --save_path, --checkpoint_freq, --tensorboard_log
 3. Training Outputs
 Each training run generates outputs under predefined directories for models and logs. The output structure is as follows:
 
-Plaintext
 model/
 └── r_ppo/
     ├── checkpoint_*.pth
@@ -194,16 +194,17 @@ model/
 runs/
 └── r_ppo/
     └── <run_id>/
-model/: Stores all trained network checkpoints, including the LSTM-FCN feature extractor and the actor-critic policy weights.
+
+    model/: Stores all trained network checkpoints, including the LSTM-FCN feature extractor and the actor-critic policy weights.
 
 runs/: Saves TensorBoard log files for training metric visualization.
 
 Evaluation
 
 1. Basic Evaluation Command
-
-Bash
+   
 python eval.py --checkpoint model/r_ppo/final_model.pth --output results/
+
 Notes:
 
 --checkpoint: Path to the model checkpoint to evaluate.
@@ -221,12 +222,12 @@ Runs episodes to compile reliable statistics.
 2. Evaluation Outputs
 The evaluation script generates the following contents:
 
-Plaintext
 results/
 ├── summary.csv              
 └── detailed/               
     └── episode_*.csv
-During evaluation, the following metrics are computed and printed:
+
+    During evaluation, the following metrics are computed and printed:
 
 Success Rate (%): Percentage of successfully completed episodes
 
